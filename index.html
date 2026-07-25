@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VeriKlin | Professional Cleaning Services</title>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === CSS VARIABLES & RESET === */
+        :root {
+            --primary-blue: #3b82f6;
+            --primary-blue-hover: #2563eb;
+            --dark: #111827;
+            --light-bg: #f9fafb;
+            --mint-green: #d1fae5;
+            --text-muted: #4b5563;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* === BUTTONS === */
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-dark {
+            background-color: var(--dark);
+            color: #ffffff;
+        }
+
+        .btn-dark:hover {
+            background-color: #000000;
+            transform: translateY(-2px);
+        }
+
+        .btn-blue {
+            background-color: var(--primary-blue);
+            color: #ffffff;
+        }
+
+        .btn-blue:hover {
+            background-color: var(--primary-blue-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 1.5px solid #ffffff;
+            color: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: 8px;
+        }
+        
+        .btn-outline:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        /* === NAVIGATION === */
+        nav {
+            padding: 15px 0;
+            background: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            align-items: center;
+        }
+
+        .nav-links li {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-links li:hover {
+            color: var(--primary-blue);
+            cursor: pointer;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            max-height: 38px;
+            width: auto;
+            display: block;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .location-pill {
+            background: var(--dark);
+            padding: 6px 14px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Mobile Hamburger Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--dark);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Unified Mobile Menu Dropdown */
+        .mobile-menu-dropdown {
+            display: none;
+            flex-direction: column;
+            background: #ffffff;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            padding: 24px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-top: 1px solid #e5e7eb;
+            z-index: 1000;
+        }
+
+        .mobile-menu-dropdown.active {
+            display: flex;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e5e7eb;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--text-muted);
+        }
+
+        .mobile-nav-links li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .mobile-nav-right {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--dark);
+        }
+
+        /* === HERO SECTION === */
+        .hero {
+            background: url('HomeBackground.jpg') center/cover no-repeat;
+            padding: 140px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 40px auto;
+        }
+
+        /* === SERVICES SECTION === */
+        .services {
+            padding: 100px 0;
+            background: #ffffff;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-header span {
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .section-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-muted);
+        }
+
+        .service-row {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        .service-row:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .service-img {
+            flex: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .service-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .service-img:hover img {
+            transform: scale(1.05);
+        }
+
+        .service-content {
+            flex: 1;
+        }
+
+        .service-content h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .service-content p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        /* === PROCESS SECTION === */
+        .process {
+            background: url('HandSanitizer.jpg') center/cover no-repeat;
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .process::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(209, 250, 229, 0.10);
+            z-index: 1;
+        }
+
+        .process-container {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .process-visual {
+            flex: 1;
+            text-align: left;
+        }
+
+        .process-visual h2 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin: 0;
+        }
+
+        .timeline {
+            flex: 1;
+            position: relative;
+            padding-left: 30px;
+            border-left: 2px solid rgba(0,0,0,0.1);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-icon {
+            position: absolute;
+            left: -41px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--dark);
+            border-radius: 50%;
+            border: 4px solid var(--mint-green);
+        }
+
+        .timeline-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .timeline-item p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* === MISSION SECTION === */
+        .mission {
+            padding: 100px 0;
+            text-align: center;
+            background: #ffffff;
+        }
+
+        .mission h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .mission p {
+            max-width: 800px;
+            margin: 0 auto 40px auto;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .mission .logo {
+            justify-content: center;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        /* === CTA SECTION === */
+        .cta-section {
+            position: relative;
+            background: url('FreeEstimate.jpg') center/cover no-repeat;
+            padding: 160px 20px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .cta-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(17, 24, 39, 0.7);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-content h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-content p {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* === FOOTER === */
+        footer {
+            background: #ffffff;
+            padding: 40px 0 20px 0;
+            text-align: center;
+        }
+
+        .footer-logo {
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+
+        .copyright {
+            color: #9ca3af;
+            font-size: 0.8rem;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 20px;
+        }
+
+        /* === RESPONSIVE DESIGN === */
+        @media (min-width: 769px) {
+            .mobile-menu-dropdown {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .service-row, .service-row:nth-child(even) {
+                flex-direction: column;
+                gap: 40px;
+            }
+            .process-container {
+                flex-direction: column;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Hide desktop navigation */
+            .nav-links, .nav-right {
+                display: none !important;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            /* Container padding adjustment to prevent edge touching */
+            .container {
+                padding: 0 20px;
+            }
+
+            .hero {
+                padding: 80px 16px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .services {
+                padding: 60px 0;
+            }
+
+            .section-header {
+                margin-bottom: 40px;
+                padding: 0 10px;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .service-content h3 {
+                font-size: 1.5rem;
+            }
+
+            .service-row {
+                margin-bottom: 50px;
+                gap: 20px;
+            }
+
+            .service-content {
+                padding: 0 5px;
+            }
+
+            .process {
+                padding: 60px 20px;
+            }
+
+            .process-visual h2 {
+                font-size: 2rem;
+            }
+
+            .mission {
+                padding: 60px 20px;
+            }
+
+            .mission h2 {
+                font-size: 1.8rem;
+            }
+
+            .cta-section {
+                padding: 90px 16px;
+            }
+
+            .cta-content h2 {
+                font-size: 2.1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 15px;
+                padding: 0 10px;
+            }
+
+            .btn-outline {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="container nav-container">
+            <ul class="nav-links">
+                <li>About</li>
+                <li>Services</li>
+                <li>
+                    More 
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </li>
+            </ul>
+            
+            <div class="logo">
+                <img src="VeriKlinLogo.png" alt="VeriKlin Logo" class="logo-img">
+            </div>
+
+            <button class="mobile-menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <div class="nav-right">
+                <span>Locations / coverage</span>
+                <div class="location-pill">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Unified Mobile Dropdown Menu -->
+            <div class="mobile-menu-dropdown" id="mobileMenu">
+                <ul class="mobile-nav-links">
+                    <li>About</li>
+                    <li>Services</li>
+                    <li>
+                        More 
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </li>
+                </ul>
+                <div class="mobile-nav-right">
+                    <span>Locations / coverage</span>
+                    <div class="location-pill">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <div class="container">
+            <h1>Built on Trust.<br>Driven by Excellence.</h1>
+            <p>We clean homes and offices with the robust attention to detail and professional care you absolutely deserve.</p>
+            <a href="#services" class="btn btn-dark">Contact Us</a>
+        </div>
+    </header>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="services container">
+        <div class="section-header">
+            <span>Services</span>
+            <h2>We handle every kind of<br>cleaning job</h2>
+            <p>Residential spaces, commercial buildings, post-construction sites, deep cleaning, routine maintenance, move-in and move-out work. Whatever your space needs, we've got the skill and discipline to get it done right.</p>
+        </div>
+
+        <!-- Service 1 -->
+        <div class="service-row">
+            <div class="service-img">
+                <img src="ResidentialCleaning.jpg" alt="Residential Cleaning">
+            </div>
+            <div class="service-content">
+                <h3>Residential Cleaning</h3>
+                <p>A clean home is more than appearance—it's about comfort, health, and peace of mind. Our residential cleaning services are tailored to your lifestyle, combining meticulous attention to detail with dependable service to ensure every visit leaves your home refreshed, organized, and cared for exactly as you expect.</p>
+                <a href="#" class="btn btn-blue">Contact Us</a>
+            </div>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="service-row">
+            <div class="service-img">
+                <img src="CommercialCleaning.jpg" alt="Commercial Cleaning">
+            </div>
+            <div class="service-content">
+                <h3>Commercial Cleaning</h3>
+                <p>Keep your business looking its best with our professional commercial cleaning services. We provide reliable cleaning solutions for offices, retail spaces, corporate facilities, and other commercial properties, creating a clean, organized, and welcoming environment for employees, clients, and visitors.</p>
+                <a href="#" class="btn btn-blue">Contact Us</a>
+            </div>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="service-row">
+            <div class="service-img">
+                <img src="PostConstruction.jpg" alt="Post-construction Cleaning">
+            </div>
+            <div class="service-content">
+                <h3>Post-construction Cleaning</h3>
+                <p>Construction may be complete, but the work isn't finished until the space is spotless. Our post-construction cleaning service removes dust, debris, and construction residue, leaving your property clean, safe, and ready for occupancy.</p>
+                <a href="#" class="btn btn-blue">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS SECTION -->
+    <section class="process">
+        <div class="container process-container">
+            <div class="process-visual">
+                <h2>Simple &<br>Straightforward</h2>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon"></div>
+                    <h4>You tell us what you need</h4>
+                    <p>Connect with us on your cleaning needs and we provide a fair quote.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon"></div>
+                    <h4>We show up and do the work</h4>
+                    <p>Our team arrives on time and cleans with professional care.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon"></div>
+                    <h4>We inspect and you approve</h4>
+                    <p>A supervisor checks everything. You check and verify it's right.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon"></div>
+                    <h4>We stay in touch</h4>
+                    <p>Feedback matters. We follow up to keep your space clean going forward.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MISSION SECTION -->
+    <section class="mission container">
+        <span>Mission</span>
+        <h2>Why we do this work</h2>
+        <p>We provide cleaning excellence for organization spaces with outstanding value by understanding each client's unique expectations and delivering results exactly as requested. We listen carefully, pay attention to detail, and communicate effectively throughout the whole process, ensuring every service meets the highest standard of satisfaction.</p>
+        
+        <div class="logo footer-logo">
+            <img src="VeriKlinLogo.png" alt="VeriKlin Logo" class="logo-img">
+        </div>
+        <a href="#" class="btn btn-blue">Contact Us</a>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+        <div class="cta-overlay"></div>
+        <div class="container cta-content">
+            <h2>Get a free estimate</h2>
+            <p>We make organizing spaces simpler for our customers. Reach out to us today. We can't wait to be at your service.</p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-outline">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                    </svg>
+                    Call us for estimate
+                </a>
+                <a href="#" class="btn btn-outline">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    Chat with us for estimate
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="logo footer-logo">
+                <img src="VeriKlinLogo.png" alt="VeriKlin Logo" class="logo-img">
+            </div>
+            <div class="footer-links">
+                <a href="#">Residential cleaning</a>
+                <a href="#">Commercial cleaning</a>
+                <a href="#">Post-construction cleaning</a>
+            </div>
+            <div class="copyright">
+                &copy; 2026 VeriKlin. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile Menu Toggle Logic
+        const menuToggle = document.getElementById('menuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        console.log("VeriKlin Landing Page Initialized with Clean Mobile Navigation & Spacing.");
+    </script>
+
+</body>
+</html>
