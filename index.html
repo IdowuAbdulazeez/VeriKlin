@@ -20,6 +20,12 @@
             --text-muted: #4b5563;
         }
 
+        html {
+            scroll-behavior: smooth;
+            /* Leaves offset space at the top when anchor links are clicked to clear the sticky navbar */
+            scroll-padding-top: 90px;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -130,7 +136,15 @@
             gap: 5px;
         }
 
-        .nav-links li:hover {
+        .nav-links li a {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: inherit;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links li:hover, .nav-links li a:hover {
             color: var(--primary-blue);
             cursor: pointer;
         }
@@ -154,6 +168,16 @@
             font-weight: 600;
         }
 
+        /* === BOUNCE ANIMATION FOR LOCATION PILL === */
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-6px);
+            }
+        }
+
         .location-pill {
             background: var(--dark);
             padding: 6px 14px;
@@ -161,6 +185,14 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
+            animation: bounce 1.5s infinite ease-in-out;
+            transition: background-color 0.2s ease;
+        }
+
+        .location-pill:hover {
+            background-color: #1f2937;
+            animation-play-state: paused;
         }
 
         /* Mobile Hamburger Toggle */
@@ -219,6 +251,18 @@
             justify-content: space-between;
         }
 
+        .mobile-nav-links li a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            color: inherit;
+        }
+
+        .mobile-nav-links li a:hover {
+            color: var(--primary-blue);
+        }
+
         .mobile-nav-right {
             display: flex;
             align-items: center;
@@ -226,6 +270,104 @@
             font-weight: 600;
             font-size: 1rem;
             color: var(--dark);
+        }
+
+        /* === MODAL POPUP STYLING === */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            padding: 35px 30px;
+            border-radius: 12px;
+            max-width: 450px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            text-align: center;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-content h3 {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+
+        .modal-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: var(--dark);
+        }
+
+        /* === SOCIAL ICONS POPUP STYLING === */
+        .social-icons-container {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .social-icon-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background-color: var(--light-bg);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            color: var(--dark);
+        }
+
+        .social-icon-link:hover {
+            transform: translateY(-3px);
+            background-color: var(--mint-green);
         }
 
         /* === HERO SECTION === */
@@ -400,6 +542,15 @@
             padding: 100px 0;
             text-align: center;
             background: #ffffff;
+        }
+
+        .mission span {
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 10px;
         }
 
         .mission h2 {
@@ -605,13 +756,15 @@
     <nav>
         <div class="container nav-container">
             <ul class="nav-links">
-                <li>About</li>
-                <li>Services</li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#process">How we work</a></li>
                 <li>
-                    More 
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="6 9 12 15 18 9"></polyline>
-                    </svg>
+                    <a href="#mission">
+                        Mission 
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </a>
                 </li>
             </ul>
             
@@ -627,7 +780,7 @@
             
             <div class="nav-right">
                 <span>Locations / coverage</span>
-                <div class="location-pill">
+                <div class="location-pill" title="View Coverage Areas">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                         <circle cx="12" cy="10" r="3"></circle>
@@ -638,18 +791,20 @@
             <!-- Unified Mobile Dropdown Menu -->
             <div class="mobile-menu-dropdown" id="mobileMenu">
                 <ul class="mobile-nav-links">
-                    <li>About</li>
-                    <li>Services</li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#process">How We Work</a></li>
                     <li>
-                        More 
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="6 9 12 15 18 9"></polyline>
-                        </svg>
+                        <a href="#mission">
+                            Mission 
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </a>
                     </li>
                 </ul>
                 <div class="mobile-nav-right">
                     <span>Locations / coverage</span>
-                    <div class="location-pill">
+                    <div class="location-pill" title="View Coverage Areas">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                             <circle cx="12" cy="10" r="3"></circle>
@@ -660,12 +815,59 @@
         </div>
     </nav>
 
+    <!-- LOCATION POPUP MODAL -->
+    <div class="modal-overlay" id="locationModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose" aria-label="Close modal">&times;</button>
+            <h3>Service Coverage Areas</h3>
+            <p><b>We currently provide professional cleaning and care services across </b> <p><b>Lagos:</b></p> <p>Ojodu, Omole, Ogba, Ikeja</p> <p>Arepo, Berger, Opic, Magodo, Surulere</p> <p>Maryland, Bank-Anthony, Gbagada, Yaba</p> <br><b>Contact us to verify your specific address or postal code.</b></p>
+            <button class="btn btn-blue" id="modalOkBtn" style="width: 100%;">Got it</button>
+        </div>
+    </div>
+
+    <!-- CONTACT / ESTIMATES SOCIAL POPUP MODAL -->
+    <div class="modal-overlay" id="contactModal">
+        <div class="modal-content">
+            <button class="modal-close" id="contactModalClose" aria-label="Close modal">&times;</button>
+            <h3>Get in Touch</h3>
+            <p>Reach out to us via any of our channels below for quick estimates, bookings, and inquiries. We look forward to working with you!</p>
+            <div class="social-icons-container">
+                <!-- WhatsApp -->
+                <a href="https://whatsapp.com" target="_blank" rel="noopener noreferrer" class="social-icon-link" title="WhatsApp">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                    </svg>
+                </a>
+                <!-- X / Twitter -->
+                <a href="https://x.com/VeriKlin?s=20" target="_blank" rel="noopener noreferrer" class="social-icon-link" title="X (Twitter)">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4l11.733 16h4.267l-11.733 -16zM4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path>
+                    </svg>
+                </a>
+                <!-- TikTok -->
+                <a href="https://www.tiktok.com/@veriklinn" target="_blank" rel="noopener noreferrer" class="social-icon-link" title="TikTok">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
+                    </svg>
+                </a>
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/veriklin.ng/" target="_blank" rel="noopener noreferrer" class="social-icon-link" title="Instagram">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#E1306C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- HERO SECTION -->
     <header class="hero">
         <div class="container">
             <h1>Built on Trust.<br>Driven by Excellence.</h1>
             <p>We clean homes and offices with the robust attention to detail and professional care you absolutely deserve.</p>
-            <a href="#services" class="btn btn-dark">Contact Us</a>
+            <a href="#" class="btn btn-dark contact-trigger-btn">Contact Us</a>
         </div>
     </header>
 
@@ -673,8 +875,7 @@
     <section id="services" class="services container">
         <div class="section-header">
             <span>Services</span>
-            <h2>We handle every kind of<br>cleaning job</h2>
-            <p>Residential spaces, commercial buildings, post-construction sites, deep cleaning, routine maintenance, move-in and move-out work. Whatever your space needs, we've got the skill and discipline to get it done right.</p>
+            <h2>What We Offer</h2>
         </div>
 
         <!-- Service 1 -->
@@ -685,7 +886,7 @@
             <div class="service-content">
                 <h3>Residential Cleaning</h3>
                 <p>A clean home is more than appearance—it's about comfort, health, and peace of mind. Our residential cleaning services are tailored to your lifestyle, combining meticulous attention to detail with dependable service to ensure every visit leaves your home refreshed, organized, and cared for exactly as you expect.</p>
-                <a href="#" class="btn btn-blue">Contact Us</a>
+                <a href="#" class="btn btn-blue contact-trigger-btn">Call us for estimates</a>
             </div>
         </div>
 
@@ -697,7 +898,7 @@
             <div class="service-content">
                 <h3>Commercial Cleaning</h3>
                 <p>Keep your business looking its best with our professional commercial cleaning services. We provide reliable cleaning solutions for offices, retail spaces, corporate facilities, and other commercial properties, creating a clean, organized, and welcoming environment for employees, clients, and visitors.</p>
-                <a href="#" class="btn btn-blue">Contact Us</a>
+                <a href="#" class="btn btn-blue contact-trigger-btn">Call us for estimates</a>
             </div>
         </div>
 
@@ -709,13 +910,13 @@
             <div class="service-content">
                 <h3>Post-construction Cleaning</h3>
                 <p>Construction may be complete, but the work isn't finished until the space is spotless. Our post-construction cleaning service removes dust, debris, and construction residue, leaving your property clean, safe, and ready for occupancy.</p>
-                <a href="#" class="btn btn-blue">Contact Us</a>
+                <a href="#" class="btn btn-blue contact-trigger-btn">Call us for estimates</a>
             </div>
         </div>
     </section>
 
     <!-- PROCESS SECTION -->
-    <section class="process">
+    <section id="process" class="process">
         <div class="container process-container">
             <div class="process-visual">
                 <h2>Simple &<br>Straightforward</h2>
@@ -747,7 +948,7 @@
     </section>
 
     <!-- MISSION SECTION -->
-    <section class="mission container">
+    <section id="mission" class="mission container">
         <span>Mission</span>
         <h2>Why we do this work</h2>
         <p>We provide cleaning excellence for organization spaces with outstanding value by understanding each client's unique expectations and delivering results exactly as requested. We listen carefully, pay attention to detail, and communicate effectively throughout the whole process, ensuring every service meets the highest standard of satisfaction.</p>
@@ -755,7 +956,7 @@
         <div class="logo footer-logo">
             <img src="VeriKlinLogo.png" alt="VeriKlin Logo" class="logo-img">
         </div>
-        <a href="#" class="btn btn-blue">Contact Us</a>
+        <a href="#" class="btn btn-blue contact-trigger-btn">Contact Us</a>
     </section>
 
     <!-- CTA SECTION -->
@@ -765,13 +966,13 @@
             <h2>Get a free estimate</h2>
             <p>We make organizing spaces simpler for our customers. Reach out to us today. We can't wait to be at your service.</p>
             <div class="cta-buttons">
-                <a href="#" class="btn btn-outline">
+                <a href="#" class="btn btn-outline contact-trigger-btn">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                     </svg>
                     Call us for estimate
                 </a>
-                <a href="#" class="btn btn-outline">
+                <a href="#" class="btn btn-outline contact-trigger-btn">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                     </svg>
@@ -791,6 +992,7 @@
                 <a href="#">Residential cleaning</a>
                 <a href="#">Commercial cleaning</a>
                 <a href="#">Post-construction cleaning</a>
+                <a href="mailto:veriklinnigeria@gmail.com">Support</a>
             </div>
             <div class="copyright">
                 &copy; 2026 VeriKlin. All rights reserved.
@@ -803,13 +1005,16 @@
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if(target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                const href = this.getAttribute('href');
+                if(href !== '#' && href.length > 1) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if(target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
                 }
             });
         });
@@ -822,6 +1027,13 @@
             mobileMenu.classList.toggle('active');
         });
 
+        // Close mobile menu when mobile nav links are clicked
+        document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
             if (!menuToggle.contains(e.target) && !mobileMenu.contains(e.target)) {
@@ -829,7 +1041,57 @@
             }
         });
 
-        console.log("VeriKlin Landing Page Initialized with Clean Mobile Navigation & Spacing.");
+        // Location Modal Popup Logic
+        const locationPills = document.querySelectorAll('.location-pill');
+        const locationModal = document.getElementById('locationModal');
+        const modalClose = document.getElementById('modalClose');
+        const modalOkBtn = document.getElementById('modalOkBtn');
+
+        locationPills.forEach(pill => {
+            pill.addEventListener('click', (e) => {
+                e.stopPropagation();
+                locationModal.classList.add('active');
+                mobileMenu.classList.remove('active'); // Close mobile menu if open
+            });
+        });
+
+        const closeModal = () => {
+            locationModal.classList.remove('active');
+        };
+
+        modalClose.addEventListener('click', closeModal);
+        modalOkBtn.addEventListener('click', closeModal);
+        
+        locationModal.addEventListener('click', (e) => {
+            if (e.target === locationModal) {
+                closeModal();
+            }
+        });
+
+        // Contact & Estimates Popup Modal Logic (WhatsApp, X, TikTok, Instagram)
+        const contactTriggers = document.querySelectorAll('.contact-trigger-btn');
+        const contactModal = document.getElementById('contactModal');
+        const contactModalClose = document.getElementById('contactModalClose');
+
+        contactTriggers.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                contactModal.classList.add('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        const closeContactModal = () => {
+            contactModal.classList.remove('active');
+        };
+
+        contactModalClose.addEventListener('click', closeContactModal);
+
+        contactModal.addEventListener('click', (e) => {
+            if (e.target === contactModal) {
+                closeContactModal();
+            }
+        });
     </script>
 
 </body>
